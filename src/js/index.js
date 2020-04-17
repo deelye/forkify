@@ -3,6 +3,7 @@ import Recipe from "./models/Recipe";
 import List from "./models/List";
 import * as searchView from "./views/searchView";
 import * as recipeView from "./views/recipeView";
+import * as listView from "./views/listView";
 import { elements, renderLoader, clearLoader } from  "./views/base";
 
 const state = {};
@@ -86,6 +87,16 @@ const controlRecipe = async () => {
 
 ["hashchange", "load"].forEach(event => window.addEventListener(event, controlRecipe));
 
+// LIST CONTROLLER
+const controlList = () => {
+  if (!state.list) state.list = new List();
+
+  state.recipe.ingredients.forEach(ingredient => {
+    const item = state.list.addItem(ingredient.count, ingredient.unit, ingredient.ingredient);
+    listView.renderItem(item);
+  });
+};
+
 // Handling recipe button clicks
 elements.recipe.addEventListener("click", event => {
   if (event.target.matches(".btn-decrease, .btn-decrease *")) {
@@ -96,6 +107,8 @@ elements.recipe.addEventListener("click", event => {
   } else if (event.target.matches(".btn-increase, .btn-increase *")) {
     state.recipe.updateServings("increase");
     recipeView.updateServingsIngredients(state.recipe);
+  } else if (event.target.matches(".recipe__btn--add, .recipe__btn--add *")) {
+    controlList();
   };
 })
 
