@@ -9,7 +9,6 @@ import * as likesView from "./views/likesView";
 import { elements, renderLoader, clearLoader } from  "./views/base";
 
 const state = {};
-window.state = state;
 
 // SEARCH CONTROLLER
 const controlSearch = async () => {
@@ -161,5 +160,3 @@ elements.recipe.addEventListener("click", event => {
     controlLike();
   } ;
 });
-
-window.list = new List();
