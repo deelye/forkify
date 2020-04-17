@@ -158,15 +158,3 @@ elements.recipe.addEventListener("click", event => {
 });
 
 window.list = new List();
-
-
-
-
-
-
-
-
-
-
-
-

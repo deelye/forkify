@@ -14,7 +14,7 @@ export const clearResults = () => {
 export const highlightSelected = id => {
   const resultsArray = Array.from(document.querySelectorAll(".results__link"));
   resultsArray.forEach(element => element.classList.remove("results__link--active"));
-  document.querySelector(`.results__link[href="#${id}"]`).classList.add("results__link--active");
+  document.querySelector(`.results__link[href*="#${id}"]`).classList.add("results__link--active");
 };
 
 export const limitRecipeTitle = (title, limit = 17) => {
