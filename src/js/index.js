@@ -95,6 +95,7 @@ const controlRecipe = async () => {
 
 // LIST CONTROLLER
 state.likes = new Likes();
+likesView.toggleLikeMenu(state.likes.getNumberLikes());
 
 const controlList = () => {
   if (!state.list) state.list = new List();
@@ -130,13 +131,14 @@ const controlLike = () => {
       state.recipe.img
       );
     likesView.toggleLikeBtn(true);
-    console.log(state.likes);
+    likesView.renderLike(newLike);
   } else {
     state.likes.deleteLike(currentID);
     likesView.toggleLikeBtn(false);
-    console.log(state.likes);
-  }
-}
+    likesView.deleteLike(currentID);
+  };
+  likesView.toggleLikeMenu(state.likes.getNumberLikes());
+};
 
 // Handling recipe button clicks
 elements.recipe.addEventListener("click", event => {
@@ -153,7 +155,7 @@ elements.recipe.addEventListener("click", event => {
   } else if (event.target.matches(".recipe__love, .recipe__love *")) {
     controlLike();
   } ;
-})
+});
 
 window.list = new List();
 
